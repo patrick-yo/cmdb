@@ -23,9 +23,12 @@ def transcode(fig):
 
 @chart_blue.route('/venn/<name>')
 def show_venn(name):
-    ratio1 = float(request.args.get('ratio1'))
-    ratio2 = float(request.args.get('ratio2'))
-    match = float(request.args.get('match'))
+    try:
+        ratio1 = float(request.args.get('ratio1'))
+        ratio2 = float(request.args.get('ratio2'))
+        match = float(request.args.get('match'))
+    except:
+        return "Invalid input."
     fig = venn(name, ratio1, ratio2, match)
     data = transcode(fig)
     fig.close()
